@@ -1,13 +1,87 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    font-family: "Roboto", sans-serif;
 }
+
+/* Main layout */
+
+.ant-layout-content {
+    overflow-y: scroll;
+    background-color: transparent !important;
+}
+
+.ant-layout-content::-webkit-scrollbar {
+    width: 0;
+}
+
+.demo-logo-vertical {
+    background-color: #ffd333;
+    padding: 0;
+    margin: 0;
+    height: 64px;
+}
+
+.sm-logo {
+    display: none;
+}
+
+.ant-layout-sider-collapsed .sm-logo {
+    display: inline;
+}
+
+.ant-layout-sider-collapsed .lg-logo {
+    display: none;
+}
+
+.ant-layout {
+    height: 100vh;
+}
+
+.ant-layout-sider {
+    flex: 0 0 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    width: 260px !important;
+}
+
+.ant-layout-sider-collapsed {
+    flex: 0 0 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    width: 80px !important;
+}
+
+.ant-menu-title-content {
+    font-size: 16px;
+}
+
+.avatar-img {
+    width: 50px;
+    height: 50px;
+    display: flex;
+}
+.avatar-img img {
+    border-radius: 10px;
+}
+
+.ant-layout-header h5 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.ant-layout-header p {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.ant-layout-header div .badge {
+    top: 16px;
+    right: -6px;
+}
+
+/* Main layouts end here */
