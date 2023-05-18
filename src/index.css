@@ -84,4 +84,8 @@ body {
     right: -6px;
 }
 
+.dropdown-menu {
+    min-width: 195px;
+}
+
 /* Main layouts end here */

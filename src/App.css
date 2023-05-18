@@ -1,11 +1,49 @@
+:root {
+    --color-212529: #212529;
+    --color-ffd333: #ffd333;
+    --color-478d24: #478d24;
+    --color-e52e2e: #e52e2e;
+    --color-828599: #828599;
+    --color-3d464d: #3d464d;
+    --color-ced4da: #ced4da;
+}
+
 /* Dashboard page */
 
 .green {
-    color: green;
+    color: var(--color-478d24);
+    font-size: 14px;
 }
 
 .red {
-    color: red;
+    color: var(--color-e52e2e);
+    font-size: 14px;
+}
+
+.form-control {
+    box-shadow: none;
+    border-color: var(--color-ced4da);
+}
+.ql-container {
+    height: 80px !important;
+}
+
+.title {
+    font-size: 28px;
+    color: var(--color-212529);
+    font-family: 'Roboto', sans-serif;
+}
+
+.sub-title {
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    color: var(--color-212529);
+}
+
+.desc {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: var(--color-828599);
 }
 
 /* Dashboard page end here */
