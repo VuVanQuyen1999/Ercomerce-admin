@@ -88,4 +88,10 @@ body {
     min-width: 195px;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 1rem;
+}
+
 /* Main layouts end here */

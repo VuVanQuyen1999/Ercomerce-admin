@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/CustomInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { object, string } from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../features/auth/authSlice";
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    let userSchema = object({
+        email: string()
+            .email("Email Should be valid")
+            .required("Email is Required"),
+        password: string().required("Password is Required"),
+    });
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: userSchema,
+        onSubmit: (values) => {
+            dispatch(login(values));
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth
+    );
+    useEffect(() => {
+        if (!user || isSuccess) {
+            navigate("admin");
+        } else {
+            alert("Not");
+        }
+    }, [user, isLoading, isError, isSuccess, message]);
     return (
         <>
             <div
@@ -20,17 +53,34 @@ const Login = () => {
                     <p className="text-center">
                         Login to your account to continue.
                     </p>
-                    <form action="">
+                    <form action="" onSubmit={formik.handleSubmit}>
                         <CustomInput
                             type="email"
                             placeholder="Email Address"
                             id="email"
+                            name="email"
+                            onCh={formik.handleChange("email")}
+                            val={formik.values.email}
                         />
+                        <div className="error">
+                            {formik.errors.email && formik.touched.email && (
+                                <div>{formik.errors.email}</div>
+                            )}
+                        </div>
                         <CustomInput
                             type="password"
                             placeholder="Password"
                             id="password"
+                            name="password"
+                            onCh={formik.handleChange("password")}
+                            val={formik.values.password}
                         />
+                        <div className="error">
+                            {formik.errors.password &&
+                                formik.touched.password && (
+                                    <div>{formik.errors.password}</div>
+                                )}
+                        </div>
                         <Link
                             className=""
                             to="/forgot-password"
@@ -41,18 +91,16 @@ const Login = () => {
                         >
                             Forgot my password!
                         </Link>
-                        <Link
-                            to="/admin"
+                        <button
                             className="border-0 px-3 py-2 mt-3 text-white w-100 fw-bold"
                             style={{
                                 backgroundColor: "#ffd333",
-                                textDecoration: "none",
                                 textAlign: "center",
                             }}
                             type="submit"
                         >
                             Login
-                        </Link>
+                        </button>
                     </form>
                 </div>
             </div>
