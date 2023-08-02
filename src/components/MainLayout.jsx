@@ -12,12 +12,16 @@ import { IoIosNotifications } from "react-icons/io";
 import { ImBlog } from "react-icons/im";
 import { BsCartPlus } from "react-icons/bs";
 import { SiBrandfolder } from "react-icons/si";
-import { BiCategoryAlt } from "react-icons/bi";
+import { BiCategoryAlt, BiLogOut } from "react-icons/bi";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
+import { SiGooglemarketingplatform } from "react-icons/si";
+import { RiCoupon3Fill } from "react-icons/ri";
 import { Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import avatar from "../images/avatar.jpg";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const { Header, Sider, Content } = Layout;
 
 const MainLayout = () => {
@@ -42,6 +46,8 @@ const MainLayout = () => {
             defaultSelectedKeys={[""]}
             onClick={({ key }) => {
               if (key === "signout") {
+                localStorage.clear();
+                window.location.reload();
               } else {
                 navigate(key);
               }
@@ -137,9 +143,31 @@ const MainLayout = () => {
                 ],
               },
               {
+                key: "marketing",
+                icon: <SiGooglemarketingplatform className="fs-4" />,
+                label: "Marketing",
+                children: [
+                  {
+                    key: "coupon",
+                    icon: <RiCoupon3Fill className="fs-4" />,
+                    label: "Add Coupon",
+                  },
+                  {
+                    key: "coupon-list",
+                    icon: <RiCoupon3Fill className="fs-4" />,
+                    label: "Coupon List",
+                  },
+                ],
+              },
+              {
                 key: "enquiries",
                 icon: <FaClipboardList className="fs-4" />,
                 label: "Enquiries",
+              },
+              {
+                key: "signout",
+                icon: <BiLogOut className="fs-4" />,
+                label: "Signout",
               },
             ]}
           />
@@ -217,6 +245,17 @@ const MainLayout = () => {
               background: colorBgContainer,
             }}
           >
+            <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              theme="light"
+            />
             <Outlet />
           </Content>
         </Layout>

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../features/customers/customerSlice";
 
 const columns = [
   {
@@ -9,32 +11,44 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
   },
   {
-    title: "Product",
-    dataIndex: "product",
+    title: "Email",
+    dataIndex: "email",
   },
   {
-    title: "Status",
-    dataIndex: "status",
+    title: "Mobile",
+    dataIndex: "mobile",
   },
 ];
 
-const dataTable = [];
-for (let i = 0; i < 46; i++) {
-  dataTable.push({
-    key: i,
-    name: `Edward King ${i}`,
-    product: `Product ${i}`,
-    status: `Status ${i}`,
-  });
-}
 const Customer = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
+
+  const customersState = useSelector((state) => state.customer.customers);
+
+  const customerList = [];
+
+  customersState.forEach((item, index) => {
+    if (item.role === "admin") {
+    }
+    customerList.push({
+      key: index + 1,
+      name: item.firstname + " " + item.lastname,
+      email: item.email,
+      mobile: item.mobile,
+    });
+  });
   return (
     <>
       <h3 className="mb-4 title">Customer</h3>
       <div className="">
-        <Table columns={columns} dataSource={dataTable} />
+        <Table columns={columns} dataSource={customerList} />
       </div>
     </>
   );
